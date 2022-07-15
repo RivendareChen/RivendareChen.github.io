@@ -11,7 +11,7 @@
   
   <title>
     
-      archive_a: 2021 
+      使用mac进行移动端Safari的web开发 
       
       
       |
@@ -101,75 +101,122 @@
 
 
       <div class="flex-container">
-        <!-- 归档页，展示本站所有文章，按照年份降序归类，url形式：https://yoursite/archives/ -->
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
 
-<!-- last: 按年份把文章分组，当前遍历到的年份 -->
-<!-- now: 当前遍历到的文章的发布年份 -->
+<!-- LaTex Display -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  }
+};
+</script>
 
-<div class="container archives">
-  <div class="post-list">
-    
-        <!-- 后续文章的发布年份呈现 -->
-        <div class="content-title">
-          <h2>
-            <span>2022</span>
-          </h2>
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">使用mac进行移动端Safari的web开发</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime" title="Update time"></i>
+          2022-07-15 22:05:47
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags" title="Tags"></i>
+                
+                <span class="span--tag">
+                  <a href="/tags/tools/" title="tools">
+                    <b>#</b> tools
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <p>用于学习响应式页面的开发。</p>
+<h2 id="1-设置"><a href="#1-设置" class="headerlink" title="1.设置"></a>1.设置</h2><p>在Safari浏览器的preference中，选择“高级”，然后勾选“在菜单栏中显示开发菜单”。</p>
+<h2 id="2-使用"><a href="#2-使用" class="headerlink" title="2.使用"></a>2.使用</h2><p>打开Safari浏览器，进入想要测试的页面，在菜单栏中的“开发”选项里点击“进入响应式设计模式”。<br><br/><br><br/><br><font color=red><br>注意：要先进入测试页面，再进入响应式设计模式。否则菜单栏中“进入响应式设计模式”无法被选中。<br></font></p>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2022/07/10/%E6%96%B0%E8%AE%BE%E5%A4%87%E6%B5%8B%E8%AF%95/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime" title="Update time"></i>
+              2022-07-15 22:05:47
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags" title="Tags"></i>
+                    
+                    <span class="span--tag">
+                      <a href="/tags/tools/" title="tools">
+                        <b>#</b> tools
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+          </div>
         </div>
       
-      <div class="post-item" title="使用mac进行移动端Safari的web开发">
-        <div class="time-m-d">07-15</div>
-        <div class="title">
-          <a href="/2022/07/15/%E4%BD%BF%E7%94%A8mac%E8%BF%9B%E8%A1%8C%E7%A7%BB%E5%8A%A8%E7%AB%AFSafari%E7%9A%84web%E5%BC%80%E5%8F%91/">
-            <span>使用mac进行移动端Safari的web开发</span>
-          </a>
-        </div>
-      </div>
+    </div>
     
-      <div class="post-item" title="新设备测试">
-        <div class="time-m-d">07-10</div>
-        <div class="title">
-          <a href="/2022/07/10/%E6%96%B0%E8%AE%BE%E5%A4%87%E6%B5%8B%E8%AF%95/">
-            <span>新设备测试</span>
-          </a>
-        </div>
-      </div>
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%AE%BE%E7%BD%AE"><span class="toc-text">1.设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E4%BD%BF%E7%94%A8"><span class="toc-text">2.使用</span></a></li></ol>
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
     
-        <!-- 后续文章的发布年份呈现 -->
-        <div class="content-title">
-          <h2>
-            <span>2021</span>
-          </h2>
-        </div>
-      
-      <div class="post-item" title="Blog&Md0">
-        <div class="time-m-d">11-10</div>
-        <div class="title">
-          <a href="/2021/11/10/blog&md0/">
-            <span>Blog&Md0</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="Git0">
-        <div class="time-m-d">11-10</div>
-        <div class="title">
-          <a href="/2021/11/10/git0/">
-            <span>Git0</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="Hello World">
-        <div class="time-m-d">11-09</div>
-        <div class="title">
-          <a href="/2021/11/09/hello-world/">
-            <span>Hello World</span>
-          </a>
-        </div>
+      <div class="comments-container">
+        
+
+
+
+
+
       </div>
     
   </div>
-</div>
+
 
         <div class="footer">
   <div class="social">
@@ -414,6 +461,24 @@
 
 
         
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E4%BD%BF%E7%94%A8mac%E8%BF%9B%E8%A1%8C%E7%A7%BB%E5%8A%A8%E7%AB%AFSafari%E7%9A%84web%E5%BC%80%E5%8F%91 + '&url=' + http%3A%2F%2Fexample.com%2F2022%2F07%2F15%2F%25E4%25BD%25BF%25E7%2594%25A8mac%25E8%25BF%259B%25E8%25A1%258C%25E7%25A7%25BB%25E5%258A%25A8%25E7%25AB%25AFSafari%25E7%259A%2584web%25E5%25BC%2580%25E5%258F%2591%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://example.com/2022/07/15/%E4%BD%BF%E7%94%A8mac%E8%BF%9B%E8%A1%8C%E7%A7%BB%E5%8A%A8%E7%AB%AFSafari%E7%9A%84web%E5%BC%80%E5%8F%91/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
   
   
 <script src="/js/shares.js"></script>

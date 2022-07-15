@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>使用mac进行移动端Safari的web开发</title>
+      <link href="/2022/07/15/%E4%BD%BF%E7%94%A8mac%E8%BF%9B%E8%A1%8C%E7%A7%BB%E5%8A%A8%E7%AB%AFSafari%E7%9A%84web%E5%BC%80%E5%8F%91/"/>
+      <url>/2022/07/15/%E4%BD%BF%E7%94%A8mac%E8%BF%9B%E8%A1%8C%E7%A7%BB%E5%8A%A8%E7%AB%AFSafari%E7%9A%84web%E5%BC%80%E5%8F%91/</url>
+      
+        <content type="html"><![CDATA[<p>用于学习响应式页面的开发。</p><h2 id="1-设置"><a href="#1-设置" class="headerlink" title="1.设置"></a>1.设置</h2><p>在Safari浏览器的preference中，选择“高级”，然后勾选“在菜单栏中显示开发菜单”。</p><h2 id="2-使用"><a href="#2-使用" class="headerlink" title="2.使用"></a>2.使用</h2><p>打开Safari浏览器，进入想要测试的页面，在菜单栏中的“开发”选项里点击“进入响应式设计模式”。<br><br/><br><br/><br><font color=red><br>注意：要先进入测试页面，再进入响应式设计模式。否则菜单栏中“进入响应式设计模式”无法被选中。<br></font></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> tools </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>新设备测试</title>
       <link href="/2022/07/10/%E6%96%B0%E8%AE%BE%E5%A4%87%E6%B5%8B%E8%AF%95/"/>
       <url>/2022/07/10/%E6%96%B0%E8%AE%BE%E5%A4%87%E6%B5%8B%E8%AF%95/</url>
