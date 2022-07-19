@@ -11,7 +11,7 @@
   
   <title>
     
-      Archives 
+      “react下对less的配置” 
       
       
       |
@@ -101,84 +101,111 @@
 
 
       <div class="flex-container">
-        <!-- 归档页，展示本站所有文章，按照年份降序归类，url形式：https://yoursite/archives/ -->
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
 
-<!-- last: 按年份把文章分组，当前遍历到的年份 -->
-<!-- now: 当前遍历到的文章的发布年份 -->
+<!-- LaTex Display -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  }
+};
+</script>
 
-<div class="container archives">
-  <div class="post-list">
-    
-        <!-- 后续文章的发布年份呈现 -->
-        <div class="content-title">
-          <h2>
-            <span>2022</span>
-          </h2>
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">“react下对less的配置”</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime" title="Update time"></i>
+          2022-07-19 22:53:53
+        </span>
+        
+      </div>
+      <div class="markdown-body">
+        <p>less是css的超集，支持变量、逻辑等高级功能，并且classname、id等的作用域仅限于引用该less文件的js文件，这使得程序员在编写DOM时不再有太多顾虑。</p>
+<h2 id="1-create-react-app-Antd-less"><a href="#1-create-react-app-Antd-less" class="headerlink" title="1. create-react-app + Antd + less"></a>1. create-react-app + Antd + less</h2><h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a><font color=red>配置</font></h3><p>Antd使用less作为样式文件，其在react中的配置见<a target="_blank" rel="noopener" href="https://ant.design/docs/react/use-with-create-react-app-cn">此处</a>。</p>
+<p>配置教程的”高级设置”小节中，如果在安装”@craco/craco”或”craco-less”时出现如下报错：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Unable to resolve dependency tree error when installing npm packages</span><br></pre></td></tr></table></figure>
+<p>请在安装指令中加入”–force”参数，忽视依赖版本匹配的问题。</p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a><font color=red>使用</font></h3><p>当在react组件中使用Antd UI，如果要自定义该UI样式，请使用less替代css。</p>
+<p>在less文件的开头添加如下代码，以引入antd的默认样式。</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@import</span> <span class="string">&#x27;~antd/dist/antd.less&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>再在后面写自定义样式，此处以Antd的Search UI为例，完整的示例less样式如下：</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//App.less</span></span><br><span class="line"><span class="keyword">@import</span> <span class="string">&#x27;~antd/dist/antd.less&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.search</span>&#123;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">40%</span>;</span><br><span class="line">    <span class="attribute">width</span>:<span class="number">20%</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>需要注意的是在js中引入less时，如果该项目是按照上述<a target="_blank" rel="noopener" href="https://ant.design/docs/react/use-with-create-react-app-cn">Antd配置教程</a>进行的配置，使用less样式时应参照下述代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//App.js</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//正确写法</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;./App.less&#x27;</span>;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">Search</span> <span class="attr">className</span>=<span class="string">&quot;search&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">Search</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//错误写法</span></span><br><span class="line"><span class="keyword">import</span> styles <span class="keyword">from</span> <span class="string">&#x27;./App.less&#x27;</span>;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">Search</span> <span class="attr">className</span>=<span class="string">&#123;styles.search&#125;</span>&gt;</span><span class="tag">&lt;/<span class="name">Search</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-仅create-react-app-less-不使用Antd"><a href="#2-仅create-react-app-less-不使用Antd" class="headerlink" title="2. 仅create-react-app + less 不使用Antd"></a>2. 仅create-react-app + less 不使用Antd</h2><p>需要手动暴露webpack，并手动修改webpack.config.js配置。教程参考<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/25b60a1ca2c2?u_atoken=4b0bb87c-a479-472e-9a9a-96c5463cb33d&u_asession=01jH2wEzRJoDftF3RL1eGf8L0lRqLm_dQ3NX_-LBzWuXNdVA0DIzM0RCKlC8LIjZnIX0KNBwm7Lovlpxjd_P_q4JsKWYrT3W_NKPr8w6oU7K_GnCBSVJdii6ukzyKHewtHPpcarp92QKzyJKyYjREPlmBkFo3NEHBv0PZUm6pbxQU&u_asig=05Pnua6R1iuwwgTDCYRJwWW3qRvqz4lNK30rW0-pzb5tVABqPRxwlKuaGP5eIXM8TeBEqHrCOhFjeEF3fRTDtmdKcc1-qHis1Xn4Lrv5kdAXaroWVFrAzJh5eghfE6r-sEhSaqb85epguVp57UXAa2RLGrgrFDhGZ7-0BGKIWsjnX9JS7q8ZD7Xtz2Ly-b0kmuyAKRFSVJkkdwVUnyHAIJzVzwICAEQFDoVMKSoupS_sbE9T5O9Gtki69-pDS2iOKfWPRPQyB_SKrj-61LB_f61u3h9VXwMyh6PgyDIVSG1W_NOHl1Ma8Samun2RzZeeGTD9uwmCf3Jd00RcjlGJAS6x1FI61OW4aupNLi9cTsxlRZoyMCR_qmgUGGYhPRLsGemWspDxyAEEo4kbsryBKb9Q&u_aref=fVkq+dQfTxx1R2ryO4sOiXtyeNc=">此处</a>。</p>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2022/07/15/%E4%BD%BF%E7%94%A8mac%E8%BF%9B%E8%A1%8C%E7%A7%BB%E5%8A%A8%E7%AB%AFSafari%E7%9A%84web%E5%BC%80%E5%8F%91/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime" title="Update time"></i>
+              2022-07-19 22:53:53
+            </span>
+            
+          </div>
+          <div class="post-foot-prev">
+            
+          </div>
         </div>
       
-      <div class="post-item" title="“react下对less的配置”">
-        <div class="time-m-d">07-19</div>
-        <div class="title">
-          <a href="/2022/07/19/%E2%80%9Creact%E4%B8%8B%E5%AF%B9less%E7%9A%84%E9%85%8D%E7%BD%AE%E2%80%9D/">
-            <span>“react下对less的配置”</span>
-          </a>
-        </div>
-      </div>
+    </div>
     
-      <div class="post-item" title="使用mac进行移动端Safari的web开发">
-        <div class="time-m-d">07-15</div>
-        <div class="title">
-          <a href="/2022/07/15/%E4%BD%BF%E7%94%A8mac%E8%BF%9B%E8%A1%8C%E7%A7%BB%E5%8A%A8%E7%AB%AFSafari%E7%9A%84web%E5%BC%80%E5%8F%91/">
-            <span>使用mac进行移动端Safari的web开发</span>
-          </a>
-        </div>
-      </div>
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-create-react-app-Antd-less"><span class="toc-text">1. create-react-app + Antd + less</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE"><span class="toc-text">配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8"><span class="toc-text">使用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E4%BB%85create-react-app-less-%E4%B8%8D%E4%BD%BF%E7%94%A8Antd"><span class="toc-text">2. 仅create-react-app + less 不使用Antd</span></a></li></ol>
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
     
-      <div class="post-item" title="新设备测试">
-        <div class="time-m-d">07-10</div>
-        <div class="title">
-          <a href="/2022/07/10/%E6%96%B0%E8%AE%BE%E5%A4%87%E6%B5%8B%E8%AF%95/">
-            <span>新设备测试</span>
-          </a>
-        </div>
-      </div>
-    
-        <!-- 后续文章的发布年份呈现 -->
-        <div class="content-title">
-          <h2>
-            <span>2021</span>
-          </h2>
-        </div>
-      
-      <div class="post-item" title="Blog&Md0">
-        <div class="time-m-d">11-10</div>
-        <div class="title">
-          <a href="/2021/11/10/blog&md0/">
-            <span>Blog&Md0</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="Git0">
-        <div class="time-m-d">11-10</div>
-        <div class="title">
-          <a href="/2021/11/10/git0/">
-            <span>Git0</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="Hello World">
-        <div class="time-m-d">11-09</div>
-        <div class="title">
-          <a href="/2021/11/09/hello-world/">
-            <span>Hello World</span>
-          </a>
-        </div>
+      <div class="comments-container">
+        
+
+
+
+
+
       </div>
     
   </div>
-</div>
+
 
         <div class="footer">
   <div class="social">
@@ -423,6 +450,24 @@
 
 
         
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E2%80%9Creact%E4%B8%8B%E5%AF%B9less%E7%9A%84%E9%85%8D%E7%BD%AE%E2%80%9D + '&url=' + http%3A%2F%2Fexample.com%2F2022%2F07%2F19%2F%25E2%2580%259Creact%25E4%25B8%258B%25E5%25AF%25B9less%25E7%259A%2584%25E9%2585%258D%25E7%25BD%25AE%25E2%2580%259D%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://example.com/2022/07/19/%E2%80%9Creact%E4%B8%8B%E5%AF%B9less%E7%9A%84%E9%85%8D%E7%BD%AE%E2%80%9D/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
   
   
 <script src="/js/shares.js"></script>
