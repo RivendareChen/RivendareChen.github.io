@@ -4,9 +4,9 @@
   
     
     <entry>
-      <title>“react下对less的配置”</title>
-      <link href="/2022/07/19/%E2%80%9Creact%E4%B8%8B%E5%AF%B9less%E7%9A%84%E9%85%8D%E7%BD%AE%E2%80%9D/"/>
-      <url>/2022/07/19/%E2%80%9Creact%E4%B8%8B%E5%AF%B9less%E7%9A%84%E9%85%8D%E7%BD%AE%E2%80%9D/</url>
+      <title>react下对less的配置</title>
+      <link href="/2022/07/19/react%E4%B8%8B%E5%AF%B9less%E7%9A%84%E9%85%8D%E7%BD%AE/"/>
+      <url>/2022/07/19/react%E4%B8%8B%E5%AF%B9less%E7%9A%84%E9%85%8D%E7%BD%AE/</url>
       
         <content type="html"><![CDATA[<p>less是css的超集，支持变量、逻辑等高级功能，并且classname、id等的作用域仅限于引用该less文件的js文件，这使得程序员在编写DOM时不再有太多顾虑。</p><h2 id="1-create-react-app-Antd-less"><a href="#1-create-react-app-Antd-less" class="headerlink" title="1. create-react-app + Antd + less"></a>1. create-react-app + Antd + less</h2><h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a><font color=red>配置</font></h3><p>Antd使用less作为样式文件，其在react中的配置见<a href="https://ant.design/docs/react/use-with-create-react-app-cn">此处</a>。</p><p>配置教程的”高级设置”小节中，如果在安装”@craco/craco”或”craco-less”时出现如下报错：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Unable to resolve dependency tree error when installing npm packages</span><br></pre></td></tr></table></figure><p>请在安装指令中加入”–force”参数，忽视依赖版本匹配的问题。</p><h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a><font color=red>使用</font></h3><p>当在react组件中使用Antd UI，如果要自定义该UI样式，请使用less替代css。</p><p>在less文件的开头添加如下代码，以引入antd的默认样式。</p><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@import</span> <span class="string">&#x27;~antd/dist/antd.less&#x27;</span>;</span><br></pre></td></tr></table></figure><p>再在后面写自定义样式，它们会覆盖掉对应的默认样式。此处以Antd的Search UI为例，完整的示例less样式如下：</p><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//App.less</span></span><br><span class="line"><span class="keyword">@import</span> <span class="string">&#x27;~antd/dist/antd.less&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.search</span>&#123;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">40%</span>;</span><br><span class="line">    <span class="attribute">width</span>:<span class="number">20%</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>需要注意的是在js中引入less时，如果该项目是按照上述<a href="https://ant.design/docs/react/use-with-create-react-app-cn">Antd配置教程</a>进行的配置，使用less样式时应参照下述代码：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//App.js</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//正确写法</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;./App.less&#x27;</span>;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">Search</span> <span class="attr">className</span>=<span class="string">&quot;search&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">Search</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//错误写法</span></span><br><span class="line"><span class="keyword">import</span> styles <span class="keyword">from</span> <span class="string">&#x27;./App.less&#x27;</span>;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">Search</span> <span class="attr">className</span>=<span class="string">&#123;styles.search&#125;</span>&gt;</span><span class="tag">&lt;/<span class="name">Search</span>&gt;</span></span></span><br></pre></td></tr></table></figure><h2 id="2-仅create-react-app-less-不使用Antd"><a href="#2-仅create-react-app-less-不使用Antd" class="headerlink" title="2. 仅create-react-app + less 不使用Antd"></a>2. 仅create-react-app + less 不使用Antd</h2><p>需要手动暴露webpack，并手动修改webpack.config.js配置。教程参考<a href="https://www.jianshu.com/p/25b60a1ca2c2?u_atoken=4b0bb87c-a479-472e-9a9a-96c5463cb33d&u_asession=01jH2wEzRJoDftF3RL1eGf8L0lRqLm_dQ3NX_-LBzWuXNdVA0DIzM0RCKlC8LIjZnIX0KNBwm7Lovlpxjd_P_q4JsKWYrT3W_NKPr8w6oU7K_GnCBSVJdii6ukzyKHewtHPpcarp92QKzyJKyYjREPlmBkFo3NEHBv0PZUm6pbxQU&u_asig=05Pnua6R1iuwwgTDCYRJwWW3qRvqz4lNK30rW0-pzb5tVABqPRxwlKuaGP5eIXM8TeBEqHrCOhFjeEF3fRTDtmdKcc1-qHis1Xn4Lrv5kdAXaroWVFrAzJh5eghfE6r-sEhSaqb85epguVp57UXAa2RLGrgrFDhGZ7-0BGKIWsjnX9JS7q8ZD7Xtz2Ly-b0kmuyAKRFSVJkkdwVUnyHAIJzVzwICAEQFDoVMKSoupS_sbE9T5O9Gtki69-pDS2iOKfWPRPQyB_SKrj-61LB_f61u3h9VXwMyh6PgyDIVSG1W_NOHl1Ma8Samun2RzZeeGTD9uwmCf3Jd00RcjlGJAS6x1FI61OW4aupNLi9cTsxlRZoyMCR_qmgUGGYhPRLsGemWspDxyAEEo4kbsryBKb9Q&u_aref=fVkq+dQfTxx1R2ryO4sOiXtyeNc=">此处</a>。</p>]]></content>
       
@@ -27,7 +27,7 @@
       
         <tags>
             
-            <tag> tools </tag>
+            <tag> 工具 </tag>
             
         </tags>
       
@@ -44,22 +44,9 @@
       
       
       
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Blog&amp;Md0</title>
-      <link href="/2021/11/10/blog&amp;md0/"/>
-      <url>/2021/11/10/blog&amp;md0/</url>
-      
-        <content type="html"><![CDATA[<p>hexo d -g 将把本地博客内容推送到github上。<br><br>注意，所推送到的github仓库的拥有者，要与本地的ssh公钥关联</p><p>vscode编辑md文档按 cmd + shift + v 进入预览模式</p><p>github pages仓库名称要和用户名一样，不然博客内容会在子目录里：<br><br>如 用户名称是aaa，github pages仓库名为bbb。<br>那么github pages的默认域名就会变为 aaa.github.io/bbb.github.io ，<br>这不但形式上不美观，而且会造成网页的渲染问题。</p><p>若 github pages仓库名称与用户名一致，那么域名为 aaa.github.io，不会出现任何问题。</p>]]></content>
-      
-      
-      
         <tags>
             
-            <tag> tools </tag>
+            <tag> 生活 </tag>
             
         </tags>
       
@@ -68,9 +55,9 @@
     
     
     <entry>
-      <title>Git0</title>
-      <link href="/2021/11/10/git0/"/>
-      <url>/2021/11/10/git0/</url>
+      <title>gitignore失效的处理方法</title>
+      <link href="/2021/11/10/gitignore%E5%A4%B1%E6%95%88%E7%9A%84%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95/"/>
+      <url>/2021/11/10/gitignore%E5%A4%B1%E6%95%88%E7%9A%84%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95/</url>
       
         <content type="html"><![CDATA[<p>如果出现gitignore失效的情况，很有可能是想要忽视的文件已经被git追踪了。<br><br>这时需要清空git缓存：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git rm -r --cached .</span><br><span class="line"></span><br><span class="line">git add .</span><br><span class="line"></span><br><span class="line">git commit -m &#x27;update .gitignore&#x27;</span><br></pre></td></tr></table></figure>]]></content>
       
@@ -78,7 +65,26 @@
       
         <tags>
             
-            <tag> tools </tag>
+            <tag> 工具 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>使用GithubPages写博客遇到的一些问题</title>
+      <link href="/2021/11/10/%E4%BD%BF%E7%94%A8GithubPages%E5%86%99%E5%8D%9A%E5%AE%A2%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/"/>
+      <url>/2021/11/10/%E4%BD%BF%E7%94%A8GithubPages%E5%86%99%E5%8D%9A%E5%AE%A2%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/</url>
+      
+        <content type="html"><![CDATA[<p>hexo d -g 将把本地博客内容推送到github上。注意，所推送到的github仓库的拥有者，要与本地的ssh公钥关联</p><p>github pages仓库名称要和用户名一样，不然博客内容会在子目录里：<br><br>例如，用户名称是aaa，github pages仓库名为bbb。<br>那么github pages的默认域名就会变为 aaa.github.io/bbb.github.io ，<br>这不但形式上不美观，而且会造成网页的渲染问题。<br><br>若github pages仓库名称与用户名一致，那么域名为 aaa.github.io，不会出现任何问题。</p><p>vscode编辑md文档按 cmd + shift + v 进入预览模式。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 工具 </tag>
             
         </tags>
       

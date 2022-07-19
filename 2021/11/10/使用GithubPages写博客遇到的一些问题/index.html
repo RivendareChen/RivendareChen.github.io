@@ -11,7 +11,7 @@
   
   <title>
     
-      Git0 
+      使用GithubPages写博客遇到的一些问题 
       
       
       |
@@ -129,7 +129,7 @@ MathJax = {
   <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
   <div class="container post-details" id="post-details">
     <div class="post-content">
-      <div class="post-title">Git0</div>
+      <div class="post-title">使用GithubPages写博客遇到的一些问题</div>
       <div class="post-attach">
         <span class="post-pubtime">
           <i class="iconfont icon-updatetime" title="Update time"></i>
@@ -140,8 +140,8 @@ MathJax = {
                 <i class="iconfont icon-tags" title="Tags"></i>
                 
                 <span class="span--tag">
-                  <a href="/tags/tools/" title="tools">
-                    <b>#</b> tools
+                  <a href="/tags/%E5%B7%A5%E5%85%B7/" title="工具">
+                    <b>#</b> 工具
                   </a>
                 </span>
                 
@@ -149,8 +149,10 @@ MathJax = {
           
       </div>
       <div class="markdown-body">
-        <p>如果出现gitignore失效的情况，很有可能是想要忽视的文件已经被git追踪了。<br><br>这时需要清空git缓存：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git rm -r --cached .</span><br><span class="line"></span><br><span class="line">git add .</span><br><span class="line"></span><br><span class="line">git commit -m &#x27;update .gitignore&#x27;</span><br></pre></td></tr></table></figure>
+        <p>hexo d -g 将把本地博客内容推送到github上。注意，所推送到的github仓库的拥有者，要与本地的ssh公钥关联</p>
+<p>github pages仓库名称要和用户名一样，不然博客内容会在子目录里：<br><br>例如，用户名称是aaa，github pages仓库名为bbb。<br>那么github pages的默认域名就会变为 aaa.github.io/bbb.github.io ，<br>这不但形式上不美观，而且会造成网页的渲染问题。<br><br>若github pages仓库名称与用户名一致，那么域名为 aaa.github.io，不会出现任何问题。</p>
+<p>vscode编辑md文档按 cmd + shift + v 进入预览模式。</p>
+
       </div>
       
         <div class="prev-or-next">
@@ -172,8 +174,8 @@ MathJax = {
                     <i class="iconfont icon-tags" title="Tags"></i>
                     
                     <span class="span--tag">
-                      <a href="/tags/tools/" title="tools">
-                        <b>#</b> tools
+                      <a href="/tags/%E5%B7%A5%E5%85%B7/" title="工具">
+                        <b>#</b> 工具
                       </a>
                     </span>
                     
@@ -182,7 +184,7 @@ MathJax = {
           </div>
           <div class="post-foot-prev">
             
-              <a href="/2021/11/10/blog&md0/" target="_self">
+              <a href="/2021/11/10/gitignore%E5%A4%B1%E6%95%88%E7%9A%84%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95/" target="_self">
                 <span>Next</span>
                 <i class="iconfont icon-chevronright"></i>
               </a>
@@ -456,12 +458,12 @@ MathJax = {
       </a>
       <div class="share-content hidden">
         
-          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + Git0 + '&url=' + http%3A%2F%2Fexample.com%2F2021%2F11%2F10%2Fgit0%2F + '" target="_blank" title="Twitter">
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E4%BD%BF%E7%94%A8GithubPages%E5%86%99%E5%8D%9A%E5%AE%A2%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98 + '&url=' + http%3A%2F%2Fexample.com%2F2021%2F11%2F10%2F%25E4%25BD%25BF%25E7%2594%25A8GithubPages%25E5%2586%2599%25E5%258D%259A%25E5%25AE%25A2%25E9%2581%2587%25E5%2588%25B0%25E7%259A%2584%25E4%25B8%2580%25E4%25BA%259B%25E9%2597%25AE%25E9%25A2%2598%2F + '" target="_blank" title="Twitter">
             <i class="iconfont icon-twitter"></i>
           </a>
         
         
-          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://example.com/2021/11/10/git0/" target="_blank" title="Facebook">
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://example.com/2021/11/10/%E4%BD%BF%E7%94%A8GithubPages%E5%86%99%E5%8D%9A%E5%AE%A2%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/" target="_blank" title="Facebook">
             <i class="iconfont icon-facebooksquare"></i>
           </a>
         
