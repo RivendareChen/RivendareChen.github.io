@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>图片测试</title>
+      <link href="/2022/08/13/%E5%9B%BE%E7%89%87%E6%B5%8B%E8%AF%95/"/>
+      <url>/2022/08/13/%E5%9B%BE%E7%89%87%E6%B5%8B%E8%AF%95/</url>
+      
+        <content type="html"><![CDATA[<p><img src="../images/test.jpeg"></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> tests </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>redux补充1</title>
       <link href="/2022/07/23/redux%E8%A1%A5%E5%85%85/"/>
       <url>/2022/07/23/redux%E8%A1%A5%E5%85%85/</url>
