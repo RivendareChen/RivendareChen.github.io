@@ -138,9 +138,9 @@ MathJax = {
         
       </div>
       <div class="markdown-body">
-        <p>​        Antd的自定义样式，可以通过官方推荐的craco进行配置，详见<a target="_blank" rel="noopener" href="https://blog.csdn.net/Loonger29/article/details/119346714">此处</a>，但这些样式均为全局生效。本文将介绍如何配置局部生效的自定义样式。</p>
-<p>​        方案的总体思路可见参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43382853/article/details/108324623">这篇文章</a>。本文将以实际开发中的一个例子进行讲解。</p>
-<p>​        对于Antd的Menu UI，用户点击子项后子项的背景色将会变化，但变化后的颜色默认参照craco.config.js中配置的primary-color。为了不修改primary-color，也为了仅在某个Menu UI中局部生效，需要在该组件对应的样式文件中进行修改。</p>
+        <p>Antd的自定义样式，可以通过官方推荐的craco进行配置，详见<a target="_blank" rel="noopener" href="https://blog.csdn.net/Loonger29/article/details/119346714">此处</a>，但这些样式均为全局生效。本文将介绍如何配置局部生效的自定义样式。</p>
+<p>方案的总体思路可见参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43382853/article/details/108324623">这篇文章</a>。本文将以实际开发中的一个例子进行讲解。</p>
+<p>对于Antd的Menu UI，用户点击子项后子项的背景色将会变化，但变化后的颜色默认参照craco.config.js中配置的primary-color。为了不修改primary-color，也为了仅在某个Menu UI中局部生效，需要在该组件对应的样式文件中进行修改。</p>
 <ul>
 <li><p>第一步是确定Menu UI被选中元素的类名</p>
 <p>打开浏览器的F12“检查”界面，选择“被选中元素”的代码块查看其“样式”，如下图所示。</p>
