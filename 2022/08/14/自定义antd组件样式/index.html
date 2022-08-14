@@ -11,7 +11,7 @@
   
   <title>
     
-      archive_a: 2022/8 
+      自定义antd组件样式 
       
       
       |
@@ -101,111 +101,102 @@
 
 
       <div class="flex-container">
-        <!-- 归档页，展示本站所有文章，按照年份降序归类，url形式：https://yoursite/archives/ -->
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
 
-<!-- last: 按年份把文章分组，当前遍历到的年份 -->
-<!-- now: 当前遍历到的文章的发布年份 -->
+<!-- LaTex Display -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  }
+};
+</script>
 
-<div class="container archives">
-  <div class="post-list">
-    
-        <!-- 后续文章的发布年份呈现 -->
-        <div class="content-title">
-          <h2>
-            <span>2022</span>
-          </h2>
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">自定义antd组件样式</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime" title="Update time"></i>
+          2022-08-14 20:09:36
+        </span>
+        
+      </div>
+      <div class="markdown-body">
+        <p>​        Antd的自定义样式，可以通过官方推荐的craco进行配置，详见<a target="_blank" rel="noopener" href="https://blog.csdn.net/Loonger29/article/details/119346714">此处</a>，但这些样式均为全局生效。本文将介绍如何配置局部生效的自定义样式。</p>
+<p>​        方案的总体思路可见参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43382853/article/details/108324623">这篇文章</a>。本文将以实际开发中的一个例子进行讲解。</p>
+<p>​        对于Antd的Menu UI，用户点击子项后子项的背景色将会变化，但变化后的颜色默认参照craco.config.js中配置的primary-color。为了不修改primary-color，也为了仅在某个Menu UI中局部生效，需要在该组件对应的样式文件中进行修改。</p>
+<ul>
+<li><p>第一步是确定Menu UI被选中元素的类名</p>
+<p>打开浏览器的F12“检查”界面，选择“被选中元素”的代码块查看其“样式”，如下图所示。</p>
+<img src="/images/%E8%87%AA%E5%AE%9A%E4%B9%89antd%E7%BB%84%E4%BB%B6%E6%A0%B7%E5%BC%8F/%E6%88%AA%E5%B1%8F2022-08-14%2020.29.00.png" alt="确定类名" style="zoom:200%;" /></li>
+</ul>
+<p>​        可以发下被选中元素的独有类名为ant-menu-item-selected。</p>
+<ul>
+<li><p>第二步是对应的修改样式文件</p>
+<p>自定义Menu UI位于项目的Star组件中，因此需要修改的是Star.module.css。在该文件中添加如下代码：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">:<span class="built_in">global</span>(.folder .ant-menu-item-selected)&#123;</span><br><span class="line">    background-color: <span class="number">#191970</span> <span class="meta">!important</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中folder是指该Menu所处div的类名。<strong>需要特别注意的是</strong>folder类名在Star.jsx中的声明不能使用CSS Module的形式。例如：<code>&lt;Menu className=&quot;folder&quot;\&gt;</code></p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;Menu className=&#123;styles.folder&#125;\&gt; <span class="comment">//错误</span></span><br><span class="line">  </span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">Menu</span> <span class="attr">className</span>=<span class="string">&quot;folder&quot;</span>\&gt;</span> //正确</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>至此，对Menu组件被选中元素背景色的自定义就成功了，效果如下图所示：</p>
+<img  src="/images/%E8%87%AA%E5%AE%9A%E4%B9%89antd%E7%BB%84%E4%BB%B6%E6%A0%B7%E5%BC%8F/%E6%88%AA%E5%B1%8F2022-08-14%2020.48.18.png" alt="最终效果" align="left" style="zoom:33%;">
+
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2022/08/13/%E5%9B%BE%E7%89%87%E6%B5%8B%E8%AF%95/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime" title="Update time"></i>
+              2022-08-14 20:09:36
+            </span>
+            
+          </div>
+          <div class="post-foot-prev">
+            
+          </div>
         </div>
       
-      <div class="post-item" title="自定义antd组件样式">
-        <div class="time-m-d">08-14</div>
-        <div class="title">
-          <a href="/2022/08/14/%E8%87%AA%E5%AE%9A%E4%B9%89antd%E7%BB%84%E4%BB%B6%E6%A0%B7%E5%BC%8F/">
-            <span>自定义antd组件样式</span>
-          </a>
-        </div>
-      </div>
+    </div>
     
-      <div class="post-item" title="图片测试">
-        <div class="time-m-d">08-13</div>
-        <div class="title">
-          <a href="/2022/08/13/%E5%9B%BE%E7%89%87%E6%B5%8B%E8%AF%95/">
-            <span>图片测试</span>
-          </a>
-        </div>
-      </div>
+
     
-      <div class="post-item" title="redux补充1">
-        <div class="time-m-d">07-23</div>
-        <div class="title">
-          <a href="/2022/07/23/redux%E8%A1%A5%E5%85%85/">
-            <span>redux补充1</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="react下对less的配置">
-        <div class="time-m-d">07-19</div>
-        <div class="title">
-          <a href="/2022/07/19/react%E4%B8%8B%E5%AF%B9less%E7%9A%84%E9%85%8D%E7%BD%AE/">
-            <span>react下对less的配置</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="使用mac进行移动端Safari的web开发">
-        <div class="time-m-d">07-15</div>
-        <div class="title">
-          <a href="/2022/07/15/%E4%BD%BF%E7%94%A8mac%E8%BF%9B%E8%A1%8C%E7%A7%BB%E5%8A%A8%E7%AB%AFSafari%E7%9A%84web%E5%BC%80%E5%8F%91/">
-            <span>使用mac进行移动端Safari的web开发</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="新设备测试">
-        <div class="time-m-d">07-10</div>
-        <div class="title">
-          <a href="/2022/07/10/%E6%96%B0%E8%AE%BE%E5%A4%87%E6%B5%8B%E8%AF%95/">
-            <span>新设备测试</span>
-          </a>
-        </div>
-      </div>
-    
-        <!-- 后续文章的发布年份呈现 -->
-        <div class="content-title">
-          <h2>
-            <span>2021</span>
-          </h2>
-        </div>
-      
-      <div class="post-item" title="gitignore失效的处理方法">
-        <div class="time-m-d">11-10</div>
-        <div class="title">
-          <a href="/2021/11/10/gitignore%E5%A4%B1%E6%95%88%E7%9A%84%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95/">
-            <span>gitignore失效的处理方法</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="使用GithubPages写博客遇到的一些问题">
-        <div class="time-m-d">11-10</div>
-        <div class="title">
-          <a href="/2021/11/10/%E4%BD%BF%E7%94%A8GithubPages%E5%86%99%E5%8D%9A%E5%AE%A2%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/">
-            <span>使用GithubPages写博客遇到的一些问题</span>
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="Hello World">
-        <div class="time-m-d">11-09</div>
-        <div class="title">
-          <a href="/2021/11/09/hello-world/">
-            <span>Hello World</span>
-          </a>
-        </div>
+      <div class="comments-container">
+        
+
+
+
+
+
       </div>
     
   </div>
-</div>
+
 
         <div class="footer">
   <div class="social">
@@ -450,6 +441,24 @@
 
 
         
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E8%87%AA%E5%AE%9A%E4%B9%89antd%E7%BB%84%E4%BB%B6%E6%A0%B7%E5%BC%8F + '&url=' + http%3A%2F%2Fexample.com%2F2022%2F08%2F14%2F%25E8%2587%25AA%25E5%25AE%259A%25E4%25B9%2589antd%25E7%25BB%2584%25E4%25BB%25B6%25E6%25A0%25B7%25E5%25BC%258F%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://example.com/2022/08/14/%E8%87%AA%E5%AE%9A%E4%B9%89antd%E7%BB%84%E4%BB%B6%E6%A0%B7%E5%BC%8F/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
   
   
 <script src="/js/shares.js"></script>
