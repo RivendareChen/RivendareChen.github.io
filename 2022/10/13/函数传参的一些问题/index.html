@@ -11,7 +11,7 @@
   
   <title>
     
-      数据加密方法 
+      函数传参的一些问题 
       
       
       |
@@ -129,19 +129,19 @@ MathJax = {
   <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
   <div class="container post-details" id="post-details">
     <div class="post-content">
-      <div class="post-title">数据加密方法</div>
+      <div class="post-title">函数传参的一些问题</div>
       <div class="post-attach">
         <span class="post-pubtime">
           <i class="iconfont icon-updatetime" title="Update time"></i>
-          2022-09-11 18:05:56
+          2022-10-13 20:22:18
         </span>
         
               <span class="post-tags">
                 <i class="iconfont icon-tags" title="Tags"></i>
                 
                 <span class="span--tag">
-                  <a href="/tags/%E5%9F%BA%E7%A1%80-%E5%AE%9E%E8%B7%B5/" title="基础->实践">
-                    <b>#</b> 基础->实践
+                  <a href="/tags/%E6%8B%BE%E9%81%97/" title="拾遗">
+                    <b>#</b> 拾遗
                   </a>
                 </span>
                 
@@ -149,51 +149,26 @@ MathJax = {
           
       </div>
       <div class="markdown-body">
-        <h3 id="1-非对称加密"><a href="#1-非对称加密" class="headerlink" title="1. 非对称加密"></a>1. 非对称加密</h3><p>加密和解密使用不同的秘钥。</p>
-<p>A拥有公钥A和私钥A；B拥有公钥B和私钥B。公钥任何人都可以知道，而私钥只能自己掌握。</p>
-<p>例如：</p>
-<pre><code>A向B发送消息：
-· A使用公钥B加密消息
-· B收到加密消息后使用私钥B解密
-
-B向A返回消息：
-· B使用公钥A加密返回信息
-· A收到返回信息后使用私钥A解密信息。
-</code></pre>
-<p>相对于<strong>加密解密依赖同一把秘钥</strong>的对称加密，非对称加密不需要传输私钥，大大提高了安全性。</p>
-<h3 id="2-签名"><a href="#2-签名" class="headerlink" title="2. 签名"></a>2. 签名</h3><p>上节中的例子可以防止第三方破解传输的密文，但是无法防止<strong>中间人攻击</strong>。</p>
-<p>例如:</p>
-<pre><code>A向B发送消息：
-· A使用**公钥B**加密消息
-· C拦截A发给B的消息
-· C使用公钥B加密假消息并发给B
-· B将C的假消息误认为是A发来的真消息
-</code></pre>
-<p>因此我们需要<strong>签名</strong>来确保发送的信息不被第三方篡改。</p>
-<p>例如：</p>
-<pre><code>A向B发送消息：
-· 用明文生成一段较短的摘要。
-· 用A的私钥加密这段摘要。
-· 加密摘要和明文一起被再次加密后传给B。
-
-· B解密明文和加密摘要。
-· B使用A的公钥解密出摘要，再用收到的明文算出一段摘要。
-· 比较解密的摘要和明文的摘要，若一致则安全，若不一致则数据被篡改。
-</code></pre>
-<p>注意，例子中的加密、解密、摘要算法都使用的是非对称加密。对加密摘要和明文的再次加密可能有<a target="_blank" rel="noopener" href="https://blog.csdn.net/u010312474/article/details/102815899">更复杂的流程</a>,此处仅为简单介绍。</p>
-<h3 id="3-上层应用"><a href="#3-上层应用" class="headerlink" title="3. 上层应用"></a>3. 上层应用</h3><ul>
-<li><p>本人的<a target="_blank" rel="noopener" href="https://github.com/RivendareChen/quant/blob/master/futu-quant/socket.js">量化交易系统</a>中应用了数字签名的部分内容(生成sha1摘要)，详见Line197-200(签名)和Line318-324(验证)。</p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/32513816">SSL协议之数据加密过程详解</a>。</p>
-</li>
-</ul>
+        <p>无论是什么编程语言，函数的传参方式一般都有两种方式：一种按值传递，另外一种按引用传递；今天我们具体来说一下JS中这两种传参方式。<br>在介绍传值方式之前，先说一下js中数据类型，分为基本类型和引用类型：</p>
+<p>基本类型：undefined、Null、Boolean、Number、String、Symbol<br>引用类型：Object</p>
+<p>两种类型的数据最本质的区别是基本类型直接存储的变量的值，而引用类型存储的是变量的应用地址。下面开始介绍js中函数传值方式：</p>
+<h3 id="1、按值传递"><a href="#1、按值传递" class="headerlink" title="1、按值传递"></a>1、按值传递</h3><p>按值传递说的就是参数都是基础类型，直接传递参数的数值。举例如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getNum</span>(<span class="params">num</span>) </span>&#123;</span><br><span class="line">    num = num + <span class="number">2</span>; </span><br><span class="line">    <span class="keyword">return</span> num; </span><br><span class="line">&#125; </span><br><span class="line"><span class="keyword">let</span> num = <span class="number">1</span>; </span><br><span class="line"><span class="keyword">let</span> result = getNum(num); </span><br><span class="line"><span class="built_in">console</span>.log(num); <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(result); <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+<p>个很好理解了，因为num是基本数据类型，传值时直接拷贝字面量给参数，所以在函数执行后num原来的数据大小是不会发生变化的，函数中存储的仅仅是num的一个副本而已。</p>
+<h3 id="2、引用传值"><a href="#2、引用传值" class="headerlink" title="2、引用传值"></a>2、引用传值</h3><p>引用传值，实际上传递的是参数的地址，而非数值。在方法调用时，实际的参数是对象（或者数组），这时js函数中的参数args的值会保存实际参数的地址。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;<span class="attr">name</span>:<span class="string">&#x27;&#x27;</span>&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">  obj.name = <span class="string">&#x27;riven&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line">foo(person);</span><br><span class="line"><span class="built_in">console</span>.log(person.name); <span class="comment">// riven</span></span><br></pre></td></tr></table></figure>
+<p>为何改变函数参数obj中name的值，person中的name也会发生改变呢，是因为obj与person指向的是同一个内存地址，所以obj中name改变会引起person中name的改变。</p>
+<h3 id="3、共享传递"><a href="#3、共享传递" class="headerlink" title="3、共享传递"></a>3、共享传递</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">func</span>(<span class="params">o</span>) </span>&#123;</span><br><span class="line">  o.name = <span class="string">&quot;riven&quot;</span></span><br><span class="line">  o = <span class="keyword">new</span> <span class="built_in">Object</span>()</span><br><span class="line">  o.name = <span class="string">&quot;chen&quot;</span></span><br><span class="line">&#125; </span><br><span class="line"><span class="keyword">let</span> obj = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line">func(obj);</span><br><span class="line"><span class="built_in">console</span>.log(obj.name); <span class="comment">// yimao</span></span><br></pre></td></tr></table></figure>
+<p>为什么会打印riven?因为在进入函数开始时对象obj和参数o是指向同一个内存地址的，代表的是同一个对象，此时设置o.name = “riven”，obj中的name也会被修改为name。但是函数中第二句o = new Object()将o的地址指向了另外一个新对象，所以o指向的对象不再是obj指向的对象，所以改变o中name的值不会影响到obj中属性的值，因此打印结果为riven。</p>
+<h3 id="4、C-指针的引用"><a href="#4、C-指针的引用" class="headerlink" title="4、C++指针的引用"></a>4、C++指针的引用</h3><p>由js共享传递想到C++类似传参问题可以用指针的指针解决。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pointerRef</span><span class="params">(<span class="keyword">int</span> *&amp;p)</span></span>&#123;</span><br><span class="line">    p = <span class="keyword">new</span> <span class="built_in"><span class="keyword">int</span></span>(<span class="number">2</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> v = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> *p = &amp;v;</span><br><span class="line"><span class="built_in">pointerRef</span>(p);</span><br><span class="line">std::cout&lt;&lt;*p; <span class="comment">//2</span></span><br></pre></td></tr></table></figure>
 
       </div>
       
         <div class="prev-or-next">
           <div class="post-foot-next">
             
-              <a href="/2022/08/14/%E8%87%AA%E5%AE%9A%E4%B9%89antd%E7%BB%84%E4%BB%B6%E6%A0%B7%E5%BC%8F/" target="_self">
+              <a href="/2022/09/11/%E6%95%B0%E6%8D%AE%E5%8A%A0%E5%AF%86%E6%96%B9%E6%B3%95/" target="_self">
                 <i class="iconfont icon-chevronleft"></i>
                 <span>Prev</span>
               </a>
@@ -202,15 +177,15 @@ B向A返回消息：
           <div class="post-attach">
             <span class="post-pubtime">
               <i class="iconfont icon-updatetime" title="Update time"></i>
-              2022-09-11 18:05:56
+              2022-10-13 20:22:18
             </span>
             
                   <span class="post-tags">
                     <i class="iconfont icon-tags" title="Tags"></i>
                     
                     <span class="span--tag">
-                      <a href="/tags/%E5%9F%BA%E7%A1%80-%E5%AE%9E%E8%B7%B5/" title="基础->实践">
-                        <b>#</b> 基础->实践
+                      <a href="/tags/%E6%8B%BE%E9%81%97/" title="拾遗">
+                        <b>#</b> 拾遗
                       </a>
                     </span>
                     
@@ -218,11 +193,6 @@ B向A返回消息：
               
           </div>
           <div class="post-foot-prev">
-            
-              <a href="/2022/10/13/%E5%87%BD%E6%95%B0%E4%BC%A0%E5%8F%82%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/" target="_self">
-                <span>Next</span>
-                <i class="iconfont icon-chevronright"></i>
-              </a>
             
           </div>
         </div>
@@ -235,7 +205,7 @@ B向A返回消息：
   <div class="post-catalog hidden" id="catalog">
     <div class="title">Contents</div>
     <div class="catalog-content">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86"><span class="toc-text">1. 非对称加密</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E7%AD%BE%E5%90%8D"><span class="toc-text">2. 签名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E4%B8%8A%E5%B1%82%E5%BA%94%E7%94%A8"><span class="toc-text">3. 上层应用</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E6%8C%89%E5%80%BC%E4%BC%A0%E9%80%92"><span class="toc-text">1、按值传递</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E5%BC%95%E7%94%A8%E4%BC%A0%E5%80%BC"><span class="toc-text">2、引用传值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81%E5%85%B1%E4%BA%AB%E4%BC%A0%E9%80%92"><span class="toc-text">3、共享传递</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E3%80%81C-%E6%8C%87%E9%92%88%E7%9A%84%E5%BC%95%E7%94%A8"><span class="toc-text">4、C++指针的引用</span></a></li></ol>
     </div>
   </div>
 
@@ -508,12 +478,12 @@ B向A返回消息：
       </a>
       <div class="share-content hidden">
         
-          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E6%95%B0%E6%8D%AE%E5%8A%A0%E5%AF%86%E6%96%B9%E6%B3%95 + '&url=' + http%3A%2F%2Fexample.com%2F2022%2F09%2F11%2F%25E6%2595%25B0%25E6%258D%25AE%25E5%258A%25A0%25E5%25AF%2586%25E6%2596%25B9%25E6%25B3%2595%2F + '" target="_blank" title="Twitter">
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E5%87%BD%E6%95%B0%E4%BC%A0%E5%8F%82%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98 + '&url=' + http%3A%2F%2Fexample.com%2F2022%2F10%2F13%2F%25E5%2587%25BD%25E6%2595%25B0%25E4%25BC%25A0%25E5%258F%2582%25E7%259A%2584%25E4%25B8%2580%25E4%25BA%259B%25E9%2597%25AE%25E9%25A2%2598%2F + '" target="_blank" title="Twitter">
             <i class="iconfont icon-twitter"></i>
           </a>
         
         
-          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://example.com/2022/09/11/%E6%95%B0%E6%8D%AE%E5%8A%A0%E5%AF%86%E6%96%B9%E6%B3%95/" target="_blank" title="Facebook">
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=http://example.com/2022/10/13/%E5%87%BD%E6%95%B0%E4%BC%A0%E5%8F%82%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/" target="_blank" title="Facebook">
             <i class="iconfont icon-facebooksquare"></i>
           </a>
         
